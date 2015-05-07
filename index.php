@@ -1,5 +1,8 @@
 <?php
 
+define('BASE', __DIR__);
 
-echo 'hello world';
-echo 'test';
+require BASE."/Ji/Load.php";
+
+
+echo 'ok';
