@@ -1,0 +1,6 @@
+*.iml
+.idea/encodings.xml
+*.name
+.idea/misc.xml
+.idea/vcs.xml
+*.xml

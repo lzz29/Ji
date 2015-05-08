@@ -6,7 +6,7 @@
  * Time: 16:34
  */
 
-namespace Ji\core;
+namespace Ji\Core;
 
 
 class Autoload {
