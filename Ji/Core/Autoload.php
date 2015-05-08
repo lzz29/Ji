@@ -13,7 +13,7 @@ class Autoload {
 
     static function load($class)
     {
-        echo $class;
-        exit;
+        $class = str_replace('\\', '/', $class).'.php';
+        include_once $class;
     }
 }
