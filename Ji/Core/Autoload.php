@@ -13,7 +13,7 @@ class Autoload {
 
     static function load($class)
     {
-        $class = str_replace('\\', '/', $class).'.php';
-        include_once $class;
+        $path = BASEDIR.'/'.str_replace('\\', '/', $class).'.php';
+        require_once $path;
     }
 }
