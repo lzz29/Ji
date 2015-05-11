@@ -1,4 +1,5 @@
 <?php
+
 define('BASEDIR', str_replace('\\', '/', __DIR__));
 
 //定义applicaiton目录

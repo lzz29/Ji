@@ -23,7 +23,7 @@ class Url {
     {
         if(empty(self::$url))
         {
-            $string = $_SERVER['REQUEST_URI'];
+            @$string = $_SERVER['REQUEST_URI'];
             $params = explode('/', $string);
             if(count($params) > 3) {
                 array_shift($params);

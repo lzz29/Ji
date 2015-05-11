@@ -5,7 +5,7 @@ class Index extends \Ji\Core\Controller
 {
     public  function index()
     {
-        echo 'hello world';
+        $this->assign('name', 'daijinjiang');
         $this->display('index');
     }
 }

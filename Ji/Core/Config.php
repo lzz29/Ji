@@ -14,20 +14,29 @@ class Config {
     static $array;
     /*
      * 加载配置文件
+     * @param   配置文件名
+     * @param   对应配置中的某个字段
      */
-    static function loadConfig($name)
+    static function loadConfig($fileName, $field = '')
     {
-        if(!self::$array[$name]) {
+        if(!self::$array[$fileName]) {
             $path = './';
-            $path .= APP.'/Config/'.$name.'.php';
+            $path .= APP.'/Config/'.$fileName.'.php';
             if(file_exists($path)) {
                 require $path;
-                self::$array[$name] = $config;
+                self::$array[$fileName] = $config;
             } else{
                 p($path);
                 p('加载配置文件不存在，请检查', 1);
             }
         }
-        return self::$array[$name];
+        if(!empty($field))
+        {
+            //只返回某个字段
+            return self::$array[$fileName][$field];
+        } else {
+            //返回所有字段
+            return self::$array[$fileName];
+        }
     }
 }
