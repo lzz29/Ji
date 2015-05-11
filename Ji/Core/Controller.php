@@ -9,15 +9,24 @@
 
 namespace Ji\Core;
 
-echo 'include';
+
 class Controller
 {
 
     /**
      * 调用模板信息
+     * @param $view 模板名称
+     *
      */
-    public function display()
+    public function display($view)
     {
-        echo 'display';
+
+    }
+    /**
+     *  将变量分类到模板
+     */
+    public  function assign()
+    {
+
     }
 }
