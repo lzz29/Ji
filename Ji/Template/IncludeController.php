@@ -26,9 +26,6 @@ class IncludeController implements Template
         foreach($match[1] as $val) {
             $replace[] = A($val);
         }
-        p($replace, 1);
-        //p($replace, 1);
-        exit;
         $content = str_replace($match[0], $replace, $content);
         return $content;
 

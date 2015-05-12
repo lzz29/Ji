@@ -20,15 +20,16 @@ class Config {
     static function loadConfig($fileName, $field = '')
     {
         if(!self::$array[$fileName]) {
-            $path = './';
-            $path .= APP.'/Config/'.$fileName.'.php';
-            if(file_exists($path)) {
-                require $path;
-                self::$array[$fileName] = $config;
-            } else{
-                p($path);
-                p('加载配置文件不存在，请检查', 1);
+            $dir = array(BASEDIR.'/Ji/Config/' ,BASEDIR.'/'.APP.'/Config/');
+            $array = array();
+            foreach($dir as $val) {
+                $path = $val.$fileName.'.php';
+                if(file_exists($path)) {
+                    require $path;
+                    $array = array_merge($array, $config);
+                }
             }
+            self::$array[$fileName] = $array;
         }
         if(!empty($field))
         {

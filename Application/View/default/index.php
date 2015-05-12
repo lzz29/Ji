@@ -6,4 +6,4 @@ dlkjafkldasjf
                 {includeView('test')}
                 {includeView('test')}
                 {includeView('test')}
-                {includeController('Index/test')}
+                {includeController('Test/say')}

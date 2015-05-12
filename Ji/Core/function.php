@@ -42,7 +42,8 @@ if(!function_exists('A')) {
         }
         $content = ob_get_contents();
         ob_end_clean();
-        if($content) {
+        //如果缓存中有内容将优先输出
+        if(!empty($content)) {
             return $content;
         } else {
             return $res;
