@@ -1,6 +1,9 @@
-<?php
+dlkjafkldasjf
+<?php  echo 'oooooo'; ?>
+<div>{$age}</dit> <div>{$name}</dit> <div>{$name}</dit> <div>{$name}</dit>
 
-echo 'oooooo';
-?>
-
-<div><?php echo $name ?></dit>
+                {includeView('test')}
+                {includeView('test')}
+                {includeView('test')}
+                {includeView('test')}
+                {includeController('Index/test')}

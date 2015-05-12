@@ -14,6 +14,7 @@ class Autoload {
     static function load($class)
     {
         $path = BASEDIR.'/'.str_replace('\\', '/', $class).'.php';
-        require_once $path;
+        if(file_exists($path))
+            require_once $path;
     }
 }

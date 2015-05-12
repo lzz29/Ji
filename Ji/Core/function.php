@@ -16,3 +16,36 @@ if(!function_exists('p')) {
     }
 }
 
+/**
+ * 加载控制器方法
+ */
+if(!function_exists('A')) {
+    function A($value)
+    {
+        $value = ltrim($value, '/');
+        $array = explode("/", $value);
+        $count = count($array);
+        if($count != 2 && $count !=3)
+            return 0;
+
+        ob_start();
+        if($count == 2) {
+            //当前应用下调用控制器
+            $path = '\\'.APP.'\\Controller\\'.$array[0];
+            $obj = new $path();
+            $res = $obj->$array[1]();
+        } else {
+            //模块调用控制器
+            $path = '\\'.$array[0].'\\Controller\\'.$array[1];
+            $obj = new $path();
+            $res = $obj->$array[2]();
+        }
+        $content = ob_get_contents();
+        ob_end_clean();
+        if($content) {
+            return $content;
+        } else {
+            return $res;
+        }
+    }
+}

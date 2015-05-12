@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 'On');
+error_reporting(E_ALL & ~ E_WARNING);
+
 define('BASEDIR', str_replace('\\', '/', __DIR__));
 
 //定义applicaiton目录

@@ -13,6 +13,35 @@ namespace Ji\Core;
 class Controller
 {
     public $var = array();//将需要分类的变量分类到模板中
+    static $obj;          //只创建一个对象
+
+    public function __construct()
+    {
+        if(!self::$obj) {
+            self::$obj = &$this;
+        }
+        return self::$obj;
+    }
+
+    /**
+     * 获取controller实例
+     */
+    static function getInstance()
+    {
+        return self::$obj;
+    }
+
+    public function show($view, $type=0)
+    {
+        //获取模板内容
+        $content = $this->display($view);
+        //匹配模板中的标签
+        $content = $this->matchContent($content);
+        if($type == 0)
+            echo $content;
+        else
+            return $content;
+    }
     /**
      * 调用模板信息
      * @param $view 模板名称
@@ -20,23 +49,17 @@ class Controller
      */
     public function display($view)
     {
-        $this->view = $view;
         //开启缓存
         ob_start();
-        //开始获取内容,将内容先写入缓存
-        if(!empty($this->var)) {
-            extract($this->var);
-        }
         //获取模板路径
-        $path = $this->getViewPath();
+        $path = $this->getViewPath($view);
         //包含模板
         include $path;
         //获取缓存
         $content = ob_get_contents();
-        //匹配模板变量
-        $content = $this->matchContent($content);
         //清空并关闭缓存
         ob_end_clean();
+        return $content;
     }
     /**
      *  将变量分类到模板
@@ -50,9 +73,8 @@ class Controller
     /*
      *  获取模板路径
      */
-    private function getViewPath()
+    private function getViewPath($view)
     {
-        $view = $this->view;
         $default = \Ji\Core\Config::loadConfig('config', 'view');
         $view = trim($view, '/');
         $path = BASEDIR.'/'.APP.'/View/'.$default."/".$view.'.php';
@@ -63,6 +85,15 @@ class Controller
      */
     public function matchContent($content)
     {
+        $obj = new \Ji\Template\Variables();
+        $obj->setVar($this->var);
+        $content = $obj->parseHtml($content);
 
+        $obj = new \Ji\Template\IncludeView();
+        $content = $obj->parseHtml($content);
+
+        $obj = new \Ji\Template\IncludeController();
+        $content = $obj->parseHtml($content);
+        return $content;
     }
 }
