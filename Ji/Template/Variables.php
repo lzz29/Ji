@@ -8,15 +8,20 @@
 
 namespace Ji\Template;
 
-use Ji\Template\Template;
 
-class Variables implements Template
+class Variables extends \Ji\Template\Template
 {
-    private $var = array();
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
 
     //替换模板标签
-    public function parseHtml($content)
+    public function parseHtml()
     {
+        $content = $this->content;
+        $vars = $this->vars;
         //匹配左右符号的正则
         $pattern = '/\{\$(.*?)\}/m';
 
@@ -27,18 +32,11 @@ class Variables implements Template
             //获取每个替换的对应值
             $values = array();
             foreach($match['1'] as $val) {
-                $values[] = $this->var[$val];
+                $values[] = $vars[$val];
             }
             //替换内容
             $content = str_replace($match[0], $values, $content);
         }
         return $content;
-    }
-    /**
-     * 设置需要的变量
-     */
-    public function setVar($var)
-    {
-        $this->var = $var;
     }
 }

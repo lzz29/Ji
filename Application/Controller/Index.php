@@ -3,7 +3,7 @@ namespace Application\Controller;
 
 class Index extends \Ji\Core\Controller
 {
-    public  function index()
+    public function index()
     {
         $this->assign('name', 'daijinjiang');
         $this->assign('age', '13');

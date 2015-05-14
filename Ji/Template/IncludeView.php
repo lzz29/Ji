@@ -11,10 +11,15 @@ namespace Ji\Template;
 
 use Ji\Template\Template;
 
-class IncludeView implements Template
+class IncludeView extends Template
 {
-    public function parseHtml($content)
+    public  function __construct()
     {
+        parent::__construct();
+    }
+    public function parseHtml()
+    {
+        $content = $this->content;
         $partter = '/\{includeView\([\'\"]?(.*?)[\'\"]?\)\}/mi';
         preg_match_all($partter, $content, $match);
         if(empty($match[0]))

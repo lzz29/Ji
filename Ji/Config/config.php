@@ -18,6 +18,11 @@ $config['baseClass'] = 'Base';
 //设置不需调用的基类
 $config['public'] = array('Public');
 
-
 //设置默认模板目录,后面可以写多套皮肤
 $config['view'] = 'default';
+
+//模板是否开启  1开  0关闭
+$config['template'] = 1;
+
+//模板自动加载的插件
+$config['auto_template_plugin'] = array('Variables', 'IncludeView', 'IncludeController');

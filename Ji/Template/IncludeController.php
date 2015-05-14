@@ -11,10 +11,12 @@ namespace Ji\Template;
 
 use Ji\Template\Template;
 
-class IncludeController implements Template
+class IncludeController extends Template
 {
-    public function parseHtml($content)
+
+    public function parseHtml()
     {
+        $content = $this->content;
         $partter = '/\{includeController\([\'\"]?(.*?)[\'\"]?\)\}/mi';
         preg_match_all($partter, $content, $match);
         if(empty($match[0]))

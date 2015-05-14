@@ -85,15 +85,21 @@ class Controller
      */
     public function matchContent($content)
     {
-        $obj = new \Ji\Template\Variables();
-        $obj->setVar($this->var);
-        $content = $obj->parseHtml($content);
+        $open = C('config', 'template');
+        //模板默认开启
+        if($open != 1)
+            return $content;
 
-        $obj = new \Ji\Template\IncludeView();
-        $content = $obj->parseHtml($content);
-
-        $obj = new \Ji\Template\IncludeController();
-        $content = $obj->parseHtml($content);
+        //设置基本参数
+        \Ji\Template\Template::setParam($content, $this->var);
+        //加载模板插件
+        $plugins = C('config', 'auto_template_plugin');
+        foreach($plugins as $obj) {
+            $name = '\\Ji\\Template\\'.$obj;
+            $obj = new $name();
+            $obj->fliter();
+        }
+        $content = \Ji\Template\Template::$scontent;
         return $content;
     }
 }

@@ -50,3 +50,11 @@ if(!function_exists('A')) {
         }
     }
 }
+
+if(!function_exists('C')) {
+    function C($file, $field = '')
+    {
+        $config = \Ji\Core\Config::loadConfig($file, $field);
+        return $config;
+    }
+}

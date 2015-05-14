@@ -9,10 +9,25 @@
 namespace Ji\Template;
 
 
-interface Template {
+class Template {
 
-    /*
-     * 解析模板并替换
-     */
-    public function parseHtml($content);
+    protected $content;
+    protected $vars;
+    static $scontent;
+    static $svars;
+    public function __construct()
+    {
+        $this->content = self::$scontent;
+        $this->vars = self::$svars;
+    }
+    static function setParam($content, $vars)
+    {
+        self::$scontent = $content;
+        self::$svars = $vars;
+    }
+    public function fliter()
+    {
+        $content = $this->parseHtml();
+        self::$scontent = $content;
+    }
 }
