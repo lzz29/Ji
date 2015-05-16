@@ -13,7 +13,7 @@ require BASEDIR.'/Ji/Core/Autoload.php';;
 spl_autoload_register('Ji\\Core\\Autoload::load');
 
 //加载公共函数
-require '/Ji/core/function.php';
+require BASEDIR.'/Ji/core/function.php';
 
 //解析url,调用对应的控制器
 $app = new Ji\Core\Application();

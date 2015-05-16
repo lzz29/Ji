@@ -50,7 +50,30 @@ if(!function_exists('A')) {
         }
     }
 }
-
+/*
+ *  调用model,返回对象
+ *  @param  $value  model名
+ *  @param  $app    应用名
+ */
+if(!function_exists('M')) {
+    function M($value, $app='')
+    {
+        $value = ucfirst($value);
+        $value = ltrim($value, '/');
+            //当前应用下调用控制器
+        if($app) {
+            $path = '\\'.$app.'\\Model\\'.$value;
+        } else {
+            $path = '\\'.APP.'\\Model\\'.$value;
+        }
+        return new $path();
+    }
+}
+/*
+ *  获取配置文件
+ *  @param  $file   配置文件名
+ *  @param  $field  参数名称
+ */
 if(!function_exists('C')) {
     function C($file, $field = '')
     {
