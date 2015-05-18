@@ -81,3 +81,13 @@ if(!function_exists('C')) {
         return $config;
     }
 }
+/*
+ *  加载public下面的文件
+ */
+if(!function_exists('Pub')) {
+    function Pub($file)
+    {
+        return '/'.APP.'/view/'.C('config', 'view').'/Public/'.$file;
+    }
+}
+

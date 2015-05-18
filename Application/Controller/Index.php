@@ -5,8 +5,7 @@ class Index extends \Ji\Core\Controller
 {
     public function index()
     {
-        $obj = M('test');
-        p($obj);
+        $this->show('index');
     }
     public function test()
     {
