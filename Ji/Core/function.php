@@ -91,3 +91,16 @@ if(!function_exists('Pub')) {
     }
 }
 
+/**
+ *  组合url
+ */
+
+if(!function_exists('U')) {
+    function U($action)
+    {
+        $host = $_SERVER['SERVER_NAME'];
+        $value = C('config', 'index');
+        $url = 'http://'.$host.'/'.$value.'/'.$action;
+        return $url;
+    }
+}

@@ -24,11 +24,10 @@ class Url {
         if(empty(self::$url))
         {
             @$string = $_SERVER['REQUEST_URI'];
-            $params = explode('/', $string);
-            if(count($params) > 3) {
-                array_shift($params);
-                array_shift($params);
-                array_shift($params);
+            $pattern = "/\.php.*?\/(.*)/";
+            preg_match($pattern, $string, $match);
+            if(!empty($match[1])) {
+                $params = explode('/', $match[1]);
             } else {
                 $params = array();
             }
