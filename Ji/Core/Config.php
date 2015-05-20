@@ -19,7 +19,7 @@ class Config {
      */
     static function loadConfig($fileName, $field = '')
     {
-        if(!self::$array[$fileName]) {
+        if(!isset(self::$array[$fileName])) {
             $dir = array(BASEDIR.'/Ji/Config/' ,BASEDIR.'/'.APP.'/Config/');
             $array = array();
             foreach($dir as $val) {

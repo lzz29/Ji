@@ -20,7 +20,6 @@ class Controller
         if(!self::$obj) {
             self::$obj = &$this;
         }
-        return self::$obj;
     }
 
     /**
