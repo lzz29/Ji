@@ -30,8 +30,11 @@ class Admin extends \Ji\Core\Controller
     }
     public function test()
     {
-        $mysql = \Ji\Core\Mysql::getInstance();
-        p($mysql);
-        p($mysql);
+        $res = $this->db->query('select * from ci_module');
+        p($res);
+    }
+    public  function test1()
+    {
+        p($this->db, 1);
     }
 }

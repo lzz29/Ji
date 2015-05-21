@@ -17,8 +17,13 @@ class Controller
 
     public function __construct()
     {
-        if(!self::$obj) {
-            self::$obj = &$this;
+        self::$obj = &$this;
+        //加载对象
+        $config = C('config', 'lib');
+        foreach($config as $k=>$obj)
+        {
+            $class = "\\Ji\\Core\\".$obj;
+            $this->$k = $class::getInstance();
         }
     }
 

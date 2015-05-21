@@ -26,3 +26,8 @@ $config['template'] = 1;
 
 //模板自动加载的插件
 $config['auto_template_plugin'] = array('Variables', 'IncludeView', 'IncludeController');
+
+//将对象加载到controll上面
+$config['lib'] = array(
+    'db' => 'Mysql',
+);

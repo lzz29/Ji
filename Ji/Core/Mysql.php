@@ -11,16 +11,20 @@ namespace Ji\Core;
 class Mysql {
 
     static $instance;
+
+    private $fields = array();      //查询字段
+
     static function getInstance()
     {
         if(!self::$instance) {
             self::$instance = new Mysql();
-            self::$instance->init();
+            self::$instance->initDb();
         }
-        return self::$instance;
+        return clone self::$instance;
     }
+    //初始化对象数据
     //初始化数据库对象
-    public function init()
+    public function initDb()
     {
         $config = C('database');
         @$db_connect = mysql_connect($config['host'], $config['username'], $config['password']) or die("Unable to connect to the MySQL!");
@@ -32,6 +36,20 @@ class Mysql {
      */
     public function query($sql)
     {
-        $result=mysql_query($sql);
+        //$this->initDb();
+        @$result=mysql_query($sql);
+        $array = array();
+        while($row = mysql_fetch_field($result)) {
+            $array[] = (array)$row;
+        }
+        return $array;
+    }
+    /*
+     * 设置指段
+     */
+    public function field($fields)
+    {
+        $this->fields = $fields;
+        return $this;
     }
 }
