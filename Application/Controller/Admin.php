@@ -30,7 +30,7 @@ class Admin extends \Ji\Core\Controller
     }
     public function test()
     {
-        $res = $this->db->query('select * from ci_module');
+        $res = $this->db->query('select * from ji_module');
         p($res);
     }
     public  function test1()

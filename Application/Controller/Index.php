@@ -1,7 +1,7 @@
 <?php
 namespace Application\Controller;
 
-class Indexbak extends \Ji\Core\Controller
+class Index extends \Ji\Core\Controller
 {
     public function index()
     {
@@ -43,6 +43,7 @@ class Indexbak extends \Ji\Core\Controller
     {
         //请求到登陆地址
         $urls = $this->login();
+        p($urls, 1);
         //跳转链接
         $url = U('Index/test');
         $this->dumpUrl($urls);

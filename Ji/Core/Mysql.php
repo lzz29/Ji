@@ -14,35 +14,38 @@ class Mysql {
 
     private $fields = array();      //查询字段
 
+    private $db;                    //mysql连接对象
+
     static function getInstance()
     {
         if(!self::$instance) {
             self::$instance = new Mysql();
             self::$instance->initDb();
         }
-        return clone self::$instance;
+        return self::$instance;
     }
     //初始化对象数据
     //初始化数据库对象
     public function initDb()
     {
         $config = C('database');
-        @$db_connect = mysql_connect($config['host'], $config['username'], $config['password']) or die("Unable to connect to the MySQL!");
-        //选择一个需要操作的数据库
-        mysql_select_db($config['dbname'],$db_connect);
+        $mysqli = new \mysqli($config['host'], $config['username'], $config["password"], $config['dbname']);
+        $mysqli->set_charset('utf-8');
+        $this->db = $mysqli;
     }
     /*
      * 执行sql
      */
     public function query($sql)
     {
-        //$this->initDb();
-        @$result=mysql_query($sql);
+        $info = $this->db->query($sql);
         $array = array();
-        while($row = mysql_fetch_field($result)) {
-            $array[] = (array)$row;
+        if($info) {
+            while($myrow = $info->fetch_array(MYSQLI_ASSOC))
+            {
+                p($myrow);
+            }
         }
-        return $array;
     }
     /*
      * 设置指段
